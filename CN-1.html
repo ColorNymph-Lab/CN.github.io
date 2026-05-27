@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的精选好物 - 推荐亚马逊好物</title>
+    <style>
+        /* 全局样式：简单的字体和背景 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #f7f7f7;
+            color: #1a1a1a;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        /* 网站页眉 */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.125rem;
+        }
+        /* 产品网格布局 */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        /* 产品卡片样式 */
+        .product-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+        .product-info {
+            padding: 1.5rem;
+        }
+        .product-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .product-description {
+            color: #555;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        /* “在亚马逊购买” 按钮样式 */
+        .amazon-btn {
+            display: inline-block;
+            background-color: #ff9900;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        .amazon-btn:hover {
+            background-color: #ff7700;
+        }
+        /* 页脚 */
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+            color: #888;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 网站头部 -->
+        <header>
+            <h1>✨ 我的精选好物</h1>
+            <p class="subtitle">严选全球好物，带你发现品质生活</p>
+        </header>
+
+        <!-- 产品列表区域，每种产品对应一个“在亚马逊购买”按钮 -->
+        <div class="products-grid">
+            <!-- 产品卡片 1 -->
+            <div class="product-card">
+                <!-- 产品图片，请将下面示例图片链接替换为你自己的产品图片 -->
+                <img class="product-image" src="https://placehold.co/600x400" alt="产品名称">
+                <div class="product-info">
+                    <h3 class="product-title">✨ 产品名称一</h3>
+                    <p class="product-description">这里可以简洁描述产品的核心卖点或功能，让用户一眼了解它的价值。</p>
+                    <!-- 亚马逊链接必须替换为你的真实商品推广链接 -->
+                    <a href="https://www.amazon.com/dp/你的商品代码?tag=你的追踪ID" 
+                       class="amazon-btn" 
+                       target="_blank" 
+                       rel="nofollow noopener">
+                        🛒 在亚马逊购买
+                    </a>
+                </div>
+            </div>
+
+            <!-- 产品卡片 2 -->
+            <div class="product-card">
+                <img class="product-image" src="https://placehold.co/600x400" alt="产品名称">
+                <div class="product-info">
+                    <h3 class="product-title">💡 产品名称二</h3>
+                    <p class="product-description">提供产品的亮点信息，激发用户的购买兴趣。</p>
+                    <a href="https://www.amazon.com/dp/你的商品代码?tag=你的追踪ID" 
+                       class="amazon-btn" 
+                       target="_blank" 
+                       rel="nofollow noopener">
+                        🛒 在亚马逊购买
+                    </a>
+                </div>
+            </div>
+
+            <!-- 产品卡片 3 -->
+            <div class="product-card">
+                <img class="product-image" src="https://placehold.co/600x400" alt="产品名称">
+                <div class="product-info">
+                    <h3 class="product-title">🚀 产品名称三</h3>
+                    <p class="product-description">突出产品的优势，引导用户点击按钮去亚马逊下单。</p>
+                    <a href="https://www.amazon.com/dp/你的商品代码?tag=你的追踪ID" 
+                       class="amazon-btn" 
+                       target="_blank" 
+                       rel="nofollow noopener">
+                        🛒 在亚马逊购买
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 网站底部 -->
+        <footer>
+            <p>© 2025 我的精选好物 | 作为亚马逊助理，我从符合条件的购买中获利。部分链接为推广链接。</p>
+            <p>This site is a participant in the Amazon Services LLC Associates Program.</p>
+        </footer>
+    </div>
+</body>
+</html>
