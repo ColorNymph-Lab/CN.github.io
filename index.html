@@ -2,164 +2,549 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的精选好物 - 推荐亚马逊好物</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>你的品牌名 - 精选美妆好物套装 | 亚马逊导购</title>
+    <!-- 使用现代、干净的系统字体，提供优雅默认样式 -->
     <style>
-        /* 全局样式：简单的字体和背景 */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* ----- 重置与基础样式 ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            background: #f7f7f7;
-            color: #1a1a1a;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica, sans-serif;
+            background: #fefcf8;   /* 温暖奶油基调 */
+            color: #1a1a2c;
             line-height: 1.5;
-            padding: 2rem 1rem;
+            scroll-behavior: smooth;
         }
+
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
+            padding: 0 24px;
         }
-        /* 网站页眉 */
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .subtitle {
-            color: #666;
-            font-size: 1.125rem;
-        }
-        /* 产品网格布局 */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        /* 产品卡片样式 */
-        .product-card {
-            background: white;
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .product-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background: #f0f0f0;
-        }
-        .product-info {
-            padding: 1.5rem;
-        }
-        .product-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        .product-description {
-            color: #555;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-        /* “在亚马逊购买” 按钮样式 */
-        .amazon-btn {
+
+        /* 按钮 & 链接默认样式 */
+        .btn, a.btn {
             display: inline-block;
-            background-color: #ff9900;
-            color: #ffffff;
+            background-color: #ff9f4b;
+            color: #fff;
             text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 2rem;
+            padding: 10px 22px;
+            border-radius: 40px;
             font-weight: 600;
             font-size: 0.9rem;
-            transition: background-color 0.2s ease;
+            transition: background 0.2s ease, transform 0.1s ease;
             border: none;
             cursor: pointer;
             text-align: center;
         }
-        .amazon-btn:hover {
-            background-color: #ff7700;
+        .btn:hover {
+            background-color: #e6831e;
+            transform: translateY(-1px);
         }
-        /* 页脚 */
-        footer {
+        /* 辅助按钮样式（用于次级链接） */
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #ff9f4b;
+            color: #ff9f4b;
+        }
+        .btn-outline:hover {
+            background-color: #ff9f4b;
+            color: white;
+        }
+
+        /* 标题装饰 */
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+            font-weight: 700;
+        }
+        .section-subhead {
             text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #ddd;
-            color: #888;
+            color: #5a5a6e;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* 网格卡片区域 */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0 3rem;
+        }
+        .product-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.08);
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 36px -16px rgba(0, 0, 0, 0.15);
+        }
+        .product-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            background: #f4ede4;
+            display: block;
+        }
+        .product-info {
+            padding: 1.4rem 1.2rem 1.6rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+        .product-desc {
+            color: #4a4a5a;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            line-height: 1.45;
+        }
+        .feature-list {
+            list-style: none;
+            margin: 0.5rem 0 1rem;
             font-size: 0.8rem;
+        }
+        .feature-list li {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .feature-list li::before {
+            content: "✨";
+            font-size: 0.75rem;
+        }
+        .product-card .btn {
+            margin-top: auto;
+            align-self: flex-start;
+        }
+
+        /* 旗舰产品 - 英雄区 */
+        .hero-section {
+            background: linear-gradient(145deg, #fff5ec 0%, #fef4e8 100%);
+            border-radius: 48px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .hero-content {
+            flex: 1.2;
+        }
+        .hero-badge {
+            background: #ffedd5;
+            color: #c2410c;
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .hero-desc {
+            margin-bottom: 1.5rem;
+            color: #3b3b4f;
+        }
+        .hero-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0 1.5rem;
+        }
+        .hero-features span {
+            background: white;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .hero-image {
+            flex: 0.8;
+            background: #f8e7da;
+            border-radius: 32px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 24px;
+        }
+
+        /* 对比表格响应式 */
+        .compare-table-wrapper {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        .compare-table th, .compare-table td {
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 1px solid #f0eae2;
+        }
+        .compare-table th {
+            background-color: #fff2e6;
+            font-weight: 700;
+        }
+        .compare-table a.view-link {
+            background: #f0e6da;
+            padding: 6px 14px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #b45116;
+        }
+        .compare-table a.view-link:hover {
+            background: #ff9f4b;
+            color: white;
+        }
+
+        /* 品牌故事 & 优势区 */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .benefit-item {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 28px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .benefit-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 购买指南 */
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0 3rem;
+        }
+        .guide-card {
+            background: #ffffffd9;
+            padding: 1.4rem;
+            border-radius: 24px;
+            border: 1px solid #f3e9df;
+        }
+
+        /* FAQ 手风琴效果 (干净简单，点击展开) */
+        .faq-list {
+            max-width: 800px;
+            margin: 1rem auto 3rem;
+        }
+        .faq-item {
+            background: white;
+            border-radius: 24px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+            border: 1px solid #f0e4d8;
+        }
+        .faq-question {
+            padding: 1.2rem 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
+        }
+        .faq-question span:last-child {
+            font-size: 1.4rem;
+            transition: transform 0.2s;
+        }
+        .faq-answer {
+            padding: 0 1.5rem 1rem 1.5rem;
+            color: #4a4a5a;
+            border-top: 1px solid #f5ede4;
+            display: none;
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        .faq-item.active .faq-question span:last-child {
+            transform: rotate(45deg);
+        }
+
+        footer {
+            margin: 4rem 0 2rem;
+            text-align: center;
+            color: #7c6c5a;
+            font-size: 0.8rem;
+            border-top: 1px solid #f0e4d8;
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 720px) {
+            .container {
+                padding: 0 16px;
+            }
+            .hero-section {
+                flex-direction: column;
+                padding: 1.8rem;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            h2 {
+                font-size: 1.6rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- 网站头部 -->
-        <header>
-            <h1>✨ 我的精选好物</h1>
-            <p class="subtitle">严选全球好物，带你发现品质生活</p>
-        </header>
 
-        <!-- 产品列表区域，每种产品对应一个“在亚马逊购买”按钮 -->
+<div class="container">
+    <!-- 头部品牌区（简单干净，无导航栏冗余） -->
+    <header style="padding: 2rem 0 1rem; text-align: center;">
+        <h1 style="font-size: 2.2rem;">✨ 你的美妆精选 ✨</h1>
+        <p style="max-width: 640px; margin: 0.5rem auto 0; color: #5f5c6e;">为创意和自信打造的美妆套装 &nbsp;|&nbsp; 🎁 礼物优选 &nbsp;|&nbsp; 🌟 亚马逊真实好物</p>
+    </header>
+
+    <!-- 特色产品区 (热销推荐) -->
+    <section>
+        <h2>🌟 精选畅销套装</h2>
+        <div class="section-subhead">最适合初学者和礼物场景的全能彩妆盘</div>
         <div class="products-grid">
-            <!-- 产品卡片 1 -->
+            <!-- 产品卡片 1 —— 手提包款 -->
             <div class="product-card">
-                <!-- 产品图片，请将下面示例图片链接替换为你自己的产品图片 -->
-                <img class="product-image" src="https://placehold.co/600x400" alt="产品名称">
+                <img class="product-img" src="https://placehold.co/600x600/fdf2e6/d9702e?text=Cute+Bag+Set" alt="手提包美妆套装">
                 <div class="product-info">
-                    <h3 class="product-title">✨ 产品名称一</h3>
-                    <p class="product-description">这里可以简洁描述产品的核心卖点或功能，让用户一眼了解它的价值。</p>
-                    <!-- 亚马逊链接必须替换为你的真实商品推广链接 -->
-                    <a href="https://www.amazon.com/dp/你的商品代码?tag=你的追踪ID" 
-                       class="amazon-btn" 
-                       target="_blank" 
-                       rel="nofollow noopener">
-                        🛒 在亚马逊购买
-                    </a>
+                    <div class="product-title">🎀 甜心手提包美妆箱</div>
+                    <div class="product-desc">手提包造型，内置眼影、腮红、高光、唇彩， 便携萌趣。</div>
+                    <ul class="feature-list">
+                        <li>手提包式设计</li>
+                        <li>含睫毛膏+化妆镜</li>
+                        <li>青少年礼物首选</li>
+                    </ul>
+                    <a href="#" class="btn">🛒 在亚马逊购买</a>
                 </div>
             </div>
-
-            <!-- 产品卡片 2 -->
+            <!-- 产品卡片 2 —— 绿色旅行箱 -->
             <div class="product-card">
-                <img class="product-image" src="https://placehold.co/600x400" alt="产品名称">
+                <img class="product-img" src="https://placehold.co/600x600/eaf7e6/547b41?text=Green+Train+Case" alt="绿色旅行化妆箱">
                 <div class="product-info">
-                    <h3 class="product-title">💡 产品名称二</h3>
-                    <p class="product-description">提供产品的亮点信息，激发用户的购买兴趣。</p>
-                    <a href="https://www.amazon.com/dp/你的商品代码?tag=你的追踪ID" 
-                       class="amazon-btn" 
-                       target="_blank" 
-                       rel="nofollow noopener">
-                        🛒 在亚马逊购买
-                    </a>
+                    <div class="product-title">🍃 新手全脸彩妆箱（绿）</div>
+                    <div class="product-desc">硬壳旅行箱，包含眼影盘、腮红、修容、唇膏及全套刷具。</div>
+                    <ul class="feature-list">
+                        <li>耐用可再利用的箱体</li>
+                        <li>全套面部化妆品</li>
+                        <li>差旅适用</li>
+                    </ul>
+                    <a href="#" class="btn">🛒 在亚马逊购买</a>
                 </div>
             </div>
-
-            <!-- 产品卡片 3 -->
+            <!-- 产品卡片 3 —— 粉色化妆箱 -->
             <div class="product-card">
-                <img class="product-image" src="https://placehold.co/600x400" alt="产品名称">
+                <img class="product-img" src="https://placehold.co/600x600/fce8f0/e85d9f?text=Pink+Train+Case" alt="粉色闪耀化妆箱">
                 <div class="product-info">
-                    <h3 class="product-title">🚀 产品名称三</h3>
-                    <p class="product-description">突出产品的优势，引导用户点击按钮去亚马逊下单。</p>
-                    <a href="https://www.amazon.com/dp/你的商品代码?tag=你的追踪ID" 
-                       class="amazon-btn" 
-                       target="_blank" 
-                       rel="nofollow noopener">
-                        🛒 在亚马逊购买
-                    </a>
+                    <div class="product-title">🎀 粉色流光化妆箱</div>
+                    <div class="product-desc">18色眼影+闪粉+唇彩，一套打造梦幻妆效。</div>
+                    <ul class="feature-list">
+                        <li>18色活力眼影</li>
+                        <li>闪耀亮片</li>
+                        <li>易收纳粉色箱体</li>
+                    </ul>
+                    <a href="#" class="btn">🛒 在亚马逊购买</a>
+                </div>
+            </div>
+            <!-- 产品卡片 4 —— 亮片包 -->
+            <div class="product-card">
+                <img class="product-img" src="https://placehold.co/600x600/fdf0cc/f7b32e?text=Sequin+Bag" alt="亮片包化妆套组">
+                <div class="product-info">
+                    <div class="product-title">🌈 亮片包青少年套组</div>
+                    <div class="product-desc">橙绿渐变亮片包，内含9色眼影、液体腮红、睫毛膏。</div>
+                    <ul class="feature-list">
+                        <li>潮流亮片包</li>
+                        <li>含液体腮红</li>
+                        <li>单品独立包装</li>
+                    </ul>
+                    <a href="#" class="btn">🛒 在亚马逊购买</a>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- 网站底部 -->
-        <footer>
-            <p>© 2025 我的精选好物 | 作为亚马逊助理，我从符合条件的购买中获利。部分链接为推广链接。</p>
-            <p>This site is a participant in the Amazon Services LLC Associates Program.</p>
-        </footer>
+    <!-- 王牌单品推荐：白色旅行箱 (旗舰款) -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-badge">🎯 编辑推荐 · 最佳礼物</div>
+            <div class="hero-title">❄️ 旗舰款 · 白色多功能化妆箱</div>
+            <div class="hero-desc">纯白质感旅行箱，完美组合眼影盘、高光、修容和刷具，让初学者也能自信创造。开箱即惊艳，送礼或自用都无可挑剔。</div>
+            <div class="hero-features">
+                <span>✨ 高级耐用的白色硬箱</span>
+                <span>🔍 内置化妆镜</span>
+                <span>🎨 多色眼影/腮红/修容</span>
+                <span>✈️ 旅行好伴侣</span>
+            </div>
+            <a href="#" class="btn">🛒 查看亚马逊详情</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://placehold.co/400x400/fbf3ea/bf7b45?text=White+Train+Case" alt="旗舰白色化妆箱">
+        </div>
+    </section>
+
+    <!-- 产品对比表格 (清晰显示不同套装) -->
+    <section>
+        <h2>📊 选择你的专属套装</h2>
+        <div class="section-subhead">根据风格、用途和需求快速挑选最合适的一款</div>
+        <div class="compare-table-wrapper">
+            <table class="compare-table">
+                <thead>
+                    <tr><th>产品</th><th>风格类型</th><th>适用人群</th><th>核心特点</th><th></th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>甜心手提包套装</td><td>手包式彩妆组</td><td>青少年、节日礼物</td><td>可爱包型 / 便携</td><td><a href="#" class="view-link">查看</a></td></tr>
+                    <tr><td>新手绿色旅行箱</td><td>硬壳训练箱</td><td>初学者 / 差旅人群</td><td>全套面部彩妆盘</td><td><a href="#" class="view-link">查看</a></td></tr>
+                    <tr><td>橙绿亮片包</td><td>软亮片包</td><td>节日派对 / 趣味妆容</td><td>9色眼影 + 液体腮红</td><td><a href="#" class="view-link">查看</a></td></tr>
+                    <tr><td>折叠旅行彩妆盘</td><td>折叠多格盘</td><td>度假 / 随时补妆</td><td>超省空间 / 带身体闪粉</td><td><a href="#" class="view-link">查看</a></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- 更多热爱款  (小网格) -->
+    <section>
+        <h2>💖 更多挚爱甄选</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <img class="product-img" src="https://placehold.co/600x600/f0e5ff/b189ff?text=Purple+Gift+Box" alt="紫色礼盒">
+                <div class="product-info">
+                    <div class="product-title">💜 紫色精致礼盒</div>
+                    <div class="product-desc">2个眼影盘 + 高级唇膏，精美纸质礼盒包装。</div>
+                    <a href="#" class="btn">查看亚马逊</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img class="product-img" src="https://placehold.co/600x600/f7ede0/cb8b42?text=Classic+Handbag" alt="经典手提包美妆">
+                <div class="product-info">
+                    <div class="product-title">👜 经典手提包美妆套装</div>
+                    <div class="product-desc">流畅眼线笔+雅致腮红，手提包造型迷人便携。</div>
+                    <a href="#" class="btn">查看亚马逊</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img class="product-img" src="https://placehold.co/600x600/f6eedf/d4b27c?text=Gold+Train+Case" alt="金色新手训练箱">
+                <div class="product-info">
+                    <div class="product-title">🏆 金色新手化妆箱</div>
+                    <div class="product-desc">奢华金款，含必备化妆刷和高光。</div>
+                    <a href="#" class="btn">查看亚马逊</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img class="product-img" src="https://placehold.co/600x600/ffe7e7/e6836f?text=Mega+Palette" alt="24色眼影盘">
+                <div class="product-info">
+                    <div class="product-title">🎨 24色巨型眼影盘</div>
+                    <div class="product-desc">24种惊艳哑光/珠光，解锁无限妆容可能。</div>
+                    <a href="#" class="btn">查看亚马逊</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 品牌故事 + 为什么客户喜欢我们 -->
+    <div class="about-grid">
+        <div>
+            <h2>🎨 关于你的品牌</h2>
+            <p style="margin-top: 0.5rem;">我们让美妆变得触手可及、充满乐趣。无需昂贵门槛，为喜欢探索的初学者和寻找美妆礼物的你，提供简单完整的All-in-one套装。</p>
+            <p style="margin-top: 1rem;">无论寻找坚固的差旅箱，还是趣味手包套装，你的品牌名都为你带来实用又漂亮的美妆解决方案。</p>
+        </div>
+        <div>
+            <h2>✨ 为什么买家喜爱我们</h2>
+            <div class="benefits-grid" style="margin-top: 0.5rem;">
+                <div class="benefit-item"><div class="benefit-icon">🎁</div><strong>All-in-One 省心</strong><br>无需单独买刷具/镜子，一盒齐全。</div>
+                <div class="benefit-item"><div class="benefit-icon">📦</div><strong>礼物级包装</strong><br>开箱仪式感满满，适合送礼。</div>
+                <div class="benefit-item"><div class="benefit-icon">🌈</div><strong>新手友好</strong><br>色彩搭配和谐，不易出错。</div>
+                <div class="benefit-item"><div class="benefit-icon">✈️</div><strong>旅行无忧</strong><br>耐用硬壳，保护好粉质彩妆。</div>
+            </div>
+        </div>
     </div>
+
+    <!-- 选购指南 (提高信任转化) -->
+    <section>
+        <h2>🛍️ 你的美妆选购指南</h2>
+        <div class="guide-grid">
+            <div class="guide-card"><strong>1. 新手怎么选？</strong><br>选择带化妆工具的All-in-One彩盘，打开后所有产品一目了然，帮助理解妆效搭配。</div>
+            <div class="guide-card"><strong>2. 青少年礼物的要点</strong><br>青睐“Cutie手提包”或亮片包系列，色彩丰富又充满趣味性，激发创造力。</div>
+            <div class="guide-card"><strong>3. 旅行 vs 家用</strong><br>家用可选大折叠盘；旅行必须用硬质化妆箱或紧凑折叠盘，防摔抗压。</div>
+            <div class="guide-card"><strong>4. 最佳礼物原则</strong><br>紫色礼盒/金属化妆箱自带高级感，拆箱即显心意。</div>
+        </div>
+    </section>
+
+    <!-- FAQ 常见问题（按#faq锚点参考整理） -->
+    <section id="faq">
+        <h2 style="text-align: center;">❓ 常见问题</h2>
+        <div class="faq-list">
+            <div class="faq-item"><div class="faq-question"><span>哪个套装最适合新手？</span><span>+</span></div><div class="faq-answer">训练箱系列提供完整的刷具、眼影和腮红工具包，内部结构清晰，适合初学者练习。</div></div>
+            <div class="faq-item"><div class="faq-question"><span>这些彩妆套组适合青少年吗？</span><span>+</span></div><div class="faq-answer">非常适合。产品趣味包装、色彩丰富，帮助他们轻松学习化妆，建立自信。</div></div>
+            <div class="faq-item"><div class="faq-question"><span>套装内含镜子吗？</span><span>+</span></div><div class="faq-answer">大多数旅行箱和折叠彩妆盘盖子上都内置了化妆镜，补妆方便。</div></div>
+            <div class="faq-item"><div class="faq-question"><span>里面是否带化妆刷？</span><span>+</span></div><div class="faq-answer">多数all-in-one套装和初学者套盒都附赠基础刷具或海绵棒，开盒即可使用。</div></div>
+            <div class="faq-item"><div class="faq-question"><span>如何购买这些产品？</span><span>+</span></div><div class="faq-answer">请点击页面上任何亚马逊按钮，将跳转至官方商品页购买。</div></div>
+        </div>
+    </section>
+
+    <!-- 底部号召 + 亚马逊商店链接 -->
+    <footer>
+        <p>⭐ 发现你的完美美妆伴侣 ⭐</p>
+        <p style="margin: 1rem 0;"><a href="#" class="btn btn-outline" style="background:transparent;">🛍️ 前往亚马逊商店</a></p>
+        <p>作为 Amazon Associate，我们通过符合条件的购买获得收益。<br>© 2025 你的品牌名 | 所有商品均为亚马逊正品</p>
+    </footer>
+</div>
+
+<script>
+    // 简单的FAQ折叠交互
+    document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', () => {
+            const parent = q.closest('.faq-item');
+            if(parent) {
+                parent.classList.toggle('active');
+            }
+        });
+    });
+</script>
 </body>
 </html>
